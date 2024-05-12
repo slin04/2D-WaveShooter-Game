@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bamp35jrqrnh"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_nj2o8"]
+[ext_resource type="Texture2D" uid="uid://cv4kdj5hok6fi" path="res://images/newPlayer.png" id="2_bxn2s"]
+[ext_resource type="AudioStream" uid="uid://dbc1hab83435x" path="res://sounds/gun.wav" id="3_xd3l6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kbac6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bxn2s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xm752"]
+radius = 43.1856
+
+[node name="Player" type="Area2D"]
+position = Vector2(551, 332)
+script = ExtResource("1_nj2o8")
+metadata/_edit_group_ = true
+
+[node name="PlayerModel" type="AnimatedSprite2D" parent="."]
+modulate = Color(1.5, 1.5, 1.5, 1)
+position = Vector2(-3, -3)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_kbac6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xm752")
+
+[node name="GunSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xd3l6")
+volume_db = -10.306

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://54p22p6d2w4"]
+
+[ext_resource type="Texture2D" uid="uid://c0glypuda8rj8" path="res://images/grunt.png" id="1_3xddg"]
+[ext_resource type="Script" path="res://grunt.gd" id="1_psjfb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lv1h6"]
+radius = 33.3766
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_psjfb")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, -2)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_3xddg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_lv1h6")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

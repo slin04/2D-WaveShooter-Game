@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://54p22p6d2w4"]
+
+[ext_resource type="Texture2D" uid="uid://c0glypuda8rj8" path="res://images/grunt.png" id="1_3xddg"]
+[ext_resource type="Script" path="res://code/grunt.gd" id="1_psjfb"]
+[ext_resource type="AudioStream" uid="uid://4h8t6o0vhmvr" path="res://sounds/gruntshoot.wav" id="3_al63h"]
+[ext_resource type="Texture2D" uid="uid://dprfpj8g5hity" path="res://images/gruntHit.png" id="3_syo76"]
+[ext_resource type="AudioStream" uid="uid://biymlwji45fr1" path="res://grunthit.wav" id="5_xq5r1"]
+[ext_resource type="AudioStream" uid="uid://dlq6ofgaglnk3" path="res://sounds/gruntDeath.wav" id="6_ha0pj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wehfy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3xddg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_syo76")
+}],
+"loop": true,
+"name": &"on_hit",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lv1h6"]
+radius = 33.3766
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_psjfb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-2, -2)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_3xddg")
+
+[node name="GruntModel" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -2)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_wehfy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_lv1h6")
+
+[node name="GunSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_al63h")
+volume_db = -12.823
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_xq5r1")
+volume_db = -15.671
+pitch_scale = 1.41
+
+[node name="GruntDeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ha0pj")
+volume_db = -12.822
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

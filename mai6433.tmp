@@ -1,0 +1,107 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqn3g8reiy8kc"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_862m1"]
+[ext_resource type="PackedScene" uid="uid://bamp35jrqrnh" path="res://player.tscn" id="1_dkm27"]
+[ext_resource type="Texture2D" uid="uid://dgvw4ijxxfp8g" path="res://images/grid.jpg" id="3_8f00t"]
+[ext_resource type="PackedScene" uid="uid://54p22p6d2w4" path="res://grunt.tscn" id="3_yahs6"]
+[ext_resource type="AudioStream" uid="uid://1vh3dwgtqkjj" path="res://sounds/nuphory - 「 depthcore 」soul reattachment project X—95.mp3" id="5_bes3e"]
+
+[sub_resource type="Curve2D" id="Curve2D_r3of6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1920, 0, 0, 0, 0, 0, 1920, 1080, 0, 0, 0, 0, 0, 1080, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="Environment" id="Environment_epgnu"]
+background_mode = 3
+glow_enabled = true
+glow_levels/1 = 1.5
+glow_levels/2 = 1.96
+glow_levels/3 = 1.36
+glow_levels/4 = 0.36
+glow_levels/5 = 0.36
+glow_intensity = 2.07
+glow_strength = 1.17
+glow_bloom = 0.16
+glow_blend_mode = 1
+glow_hdr_threshold = 1.5
+
+[node name="Main" type="Node"]
+script = ExtResource("1_862m1")
+mob_scene = ExtResource("3_yahs6")
+
+[node name="Player" parent="." instance=ExtResource("1_dkm27")]
+z_index = 1
+position = Vector2(960, 540)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(0.360784, 0.364706, 0.360784, 1)
+z_index = -1
+z_as_relative = false
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.0235294, 0.0235294, 0.0235294, 1)
+
+[node name="BackgroundGrid" type="Sprite2D" parent="."]
+modulate = Color(0.207843, 0.207843, 0.192157, 0.196078)
+position = Vector2(960, 540)
+texture = ExtResource("3_8f00t")
+
+[node name="GruntSpawner" type="Path2D" parent="."]
+curve = SubResource("Curve2D_r3of6")
+
+[node name="GruntSpawnLocation" type="PathFollow2D" parent="GruntSpawner"]
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.25
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_bes3e")
+volume_db = -15.928
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer"]
+environment = SubResource("Environment_epgnu")
+
+[node name="HP" type="Label" parent="CanvasLayer"]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 202.0
+offset_bottom = 109.0
+theme_override_font_sizes/font_size = 50
+text = "HP:"
+horizontal_alignment = 1
+
+[node name="HPValue" type="Label" parent="CanvasLayer"]
+offset_left = 180.0
+offset_top = 40.0
+offset_right = 293.0
+offset_bottom = 109.0
+theme_override_font_sizes/font_size = 50
+text = "100
+"
+horizontal_alignment = 1
+
+[node name="XP" type="Label" parent="CanvasLayer"]
+offset_left = 40.0
+offset_top = 120.0
+offset_right = 202.0
+offset_bottom = 189.0
+theme_override_font_sizes/font_size = 50
+text = "XP:
+"
+horizontal_alignment = 1
+
+[node name="HPValue2" type="Label" parent="CanvasLayer"]
+offset_left = 180.0
+offset_top = 120.0
+offset_right = 293.0
+offset_bottom = 189.0
+theme_override_font_sizes/font_size = 50
+text = "0
+"
+horizontal_alignment = 1
+
+[connection signal="shoot" from="Player" to="." method="_on_player_shoot"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
