@@ -1,17 +1,17 @@
 [gd_scene load_steps=9 format=3 uid="uid://c30xo0su2aa4"]
 
 [ext_resource type="Script" path="res://code/brawler.gd" id="1_1n5ub"]
-[ext_resource type="Texture2D" uid="uid://cb748lvleutr5" path="res://images/brawler.png" id="2_51tpe"]
+[ext_resource type="Texture2D" uid="uid://cb748lvleutr5" path="res://images/brawler.png" id="2_ht65x"]
 [ext_resource type="Texture2D" uid="uid://dioaiq0pbrhmu" path="res://images/brawler_hit.png" id="3_ntrmu"]
 [ext_resource type="AudioStream" uid="uid://4h8t6o0vhmvr" path="res://sounds/gruntshoot.wav" id="4_qnfdu"]
-[ext_resource type="AudioStream" uid="uid://biymlwji45fr1" path="res://grunthit.wav" id="5_u432o"]
+[ext_resource type="AudioStream" uid="uid://biymlwji45fr1" path="res://sounds/grunthit.wav" id="5_l0ft8"]
 [ext_resource type="AudioStream" uid="uid://dlq6ofgaglnk3" path="res://sounds/gruntDeath.wav" id="6_y0w7j"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wcby4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_51tpe")
+"texture": ExtResource("2_ht65x")
 }],
 "loop": true,
 "name": &"default",
@@ -49,7 +49,7 @@ volume_db = -12.823
 pitch_scale = 0.92
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_u432o")
+stream = ExtResource("5_l0ft8")
 volume_db = -15.671
 pitch_scale = 1.41
 
@@ -57,4 +57,9 @@ pitch_scale = 1.41
 stream = ExtResource("6_y0w7j")
 volume_db = -12.822
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

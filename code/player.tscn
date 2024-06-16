@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://cv4kdj5hok6fi" path="res://images/newPlayer.png" id="2_bxn2s"]
 [ext_resource type="Texture2D" uid="uid://bhtnmgpyfft3r" path="res://images/playerHit.png" id="3_fbavv"]
 [ext_resource type="AudioStream" uid="uid://dj3wr6jtc2cbu" path="res://sounds/playershoot.wav" id="3_nqxiv"]
-[ext_resource type="Texture2D" uid="uid://cderq6wpgh5gc" path="res://images/playerHit2.png" id="4_fth6g"]
 [ext_resource type="AudioStream" uid="uid://cw77p4thprlcb" path="res://sounds/playerhit.wav" id="4_wrwp1"]
 [ext_resource type="AudioStream" uid="uid://s1kgksojs7x5" path="res://sounds/playerDeath.wav" id="7_pq3yh"]
+[ext_resource type="AudioStream" uid="uid://cy5bany0ehppu" path="res://sounds/orb_collect.wav" id="8_ey0xb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kbac6"]
 animations = [{
@@ -21,9 +21,6 @@ animations = [{
 "frames": [{
 "duration": 0.25,
 "texture": ExtResource("3_fbavv")
-}, {
-"duration": 0.5,
-"texture": ExtResource("4_fth6g")
 }],
 "loop": true,
 "name": &"on_hit",
@@ -36,6 +33,7 @@ radius = 43.1856
 [node name="Player" type="Area2D"]
 process_mode = 1
 position = Vector2(551, 332)
+collision_mask = 9
 script = ExtResource("1_nj2o8")
 metadata/_edit_group_ = true
 
@@ -44,6 +42,7 @@ modulate = Color(1.5, 1.5, 1.5, 1)
 position = Vector2(-3, -3)
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_kbac6")
+animation = &"on_hit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visibility_layer = 8
@@ -65,5 +64,12 @@ volume_db = -10.685
 wait_time = 3.0
 one_shot = true
 
-[connection signal="area_entered" from="." to="." method="_on_enemy_bullet_collision"]
+[node name="OrbCollectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ey0xb")
+volume_db = -11.397
+
+[node name="iFrameTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_object_collision"]
 [connection signal="timeout" from="HealthRegenTimer" to="." method="_on_health_regen_timer_timeout"]
+[connection signal="timeout" from="iFrameTimer" to="." method="_on_i_frame_timer_timeout"]

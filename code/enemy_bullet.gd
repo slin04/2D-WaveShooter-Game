@@ -4,6 +4,8 @@ var velocity = Vector2(-1250,0)
 var acceleration = Vector2(-25,0)
 var damage = 10
 
+var id = "enemy_bullet"
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

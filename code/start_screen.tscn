@@ -1,0 +1,199 @@
+[gd_scene load_steps=18 format=3 uid="uid://bvu5oa601a3tn"]
+
+[ext_resource type="Script" path="res://code/start_screen.gd" id="1_khpj1"]
+[ext_resource type="PackedScene" uid="uid://bmdh2l8clerqj" path="res://code/start_player.tscn" id="2_grwgm"]
+[ext_resource type="AudioStream" uid="uid://dj3wr6jtc2cbu" path="res://sounds/playershoot.wav" id="2_xpwvb"]
+[ext_resource type="AudioStream" uid="uid://dlq6ofgaglnk3" path="res://sounds/gruntDeath.wav" id="3_4o7p2"]
+[ext_resource type="Texture2D" uid="uid://cv4kdj5hok6fi" path="res://images/newPlayer.png" id="4_5myj0"]
+[ext_resource type="Texture2D" uid="uid://bhtnmgpyfft3r" path="res://images/playerHit.png" id="5_rub48"]
+[ext_resource type="Texture2D" uid="uid://cderq6wpgh5gc" path="res://images/playerHit2.png" id="6_m7wlx"]
+[ext_resource type="Texture2D" uid="uid://c0glypuda8rj8" path="res://images/grunt.png" id="9_t8hsw"]
+[ext_resource type="Texture2D" uid="uid://dprfpj8g5hity" path="res://images/gruntHit.png" id="10_7uwq8"]
+[ext_resource type="Texture2D" uid="uid://bpwkmuqn37gxg" path="res://images/sniper.png" id="12_evkgr"]
+[ext_resource type="Texture2D" uid="uid://ceu6ij7fn2i8d" path="res://images/sniper_hit.png" id="13_0kjba"]
+
+[sub_resource type="Environment" id="Environment_8co57"]
+background_mode = 3
+glow_enabled = true
+glow_levels/1 = 1.5
+glow_levels/2 = 1.96
+glow_levels/3 = 1.36
+glow_levels/4 = 0.36
+glow_levels/5 = 0.36
+glow_intensity = 1.37
+glow_strength = 1.1
+glow_bloom = 0.14
+glow_blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i440u"]
+size = Vector2(327, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kihc3"]
+size = Vector2(310.5, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jvemm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_5myj0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.25,
+"texture": ExtResource("5_rub48")
+}, {
+"duration": 0.5,
+"texture": ExtResource("6_m7wlx")
+}],
+"loop": true,
+"name": &"on_hit",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fxo21"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_t8hsw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_7uwq8")
+}],
+"loop": true,
+"name": &"on_hit",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_elthq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_evkgr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_0kjba")
+}],
+"loop": true,
+"name": &"on_hit",
+"speed": 5.0
+}]
+
+[node name="Start Screen" type="Node2D"]
+script = ExtResource("1_khpj1")
+player_scene = ExtResource("2_grwgm")
+
+[node name="Background" type="ColorRect" parent="."]
+modulate = Color(0.360784, 0.364706, 0.360784, 1)
+z_index = -1
+z_as_relative = false
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.0627451, 0.0980392, 0.145098, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8co57")
+
+[node name="StartButton" type="Area2D" parent="."]
+position = Vector2(706, -350)
+collision_layer = 2
+collision_mask = 4
+
+[node name="StartLabel" type="Label" parent="StartButton"]
+offset_left = 802.0
+offset_top = 580.0
+offset_right = 1131.0
+offset_bottom = 690.0
+theme_override_font_sizes/font_size = 60
+text = "Start Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartHitbox" type="CollisionShape2D" parent="StartButton"]
+visible = false
+position = Vector2(966, 637)
+shape = SubResource("RectangleShape2D_i440u")
+
+[node name="QuitButton" type="Area2D" parent="."]
+position = Vector2(801, -325)
+collision_layer = 2
+collision_mask = 4
+
+[node name="QuitHitbox" type="CollisionShape2D" parent="QuitButton"]
+visible = false
+position = Vector2(879.75, 757)
+shape = SubResource("RectangleShape2D_kihc3")
+
+[node name="QuitLabel" type="Label" parent="QuitButton"]
+offset_left = 715.0
+offset_top = 700.0
+offset_right = 1044.0
+offset_bottom = 810.0
+theme_override_font_sizes/font_size = 60
+text = "Quit Game
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameLabel" type="Label" parent="."]
+offset_left = 1218.0
+offset_top = 72.0
+offset_right = 1839.0
+offset_bottom = 182.0
+theme_override_font_sizes/font_size = 80
+text = "Game Title Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xpwvb")
+volume_db = -10.987
+pitch_scale = 1.48
+
+[node name="QuitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_4o7p2")
+volume_db = -10.063
+pitch_scale = 1.47
+
+[node name="Decorations" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerModel" type="AnimatedSprite2D" parent="Decorations"]
+visible = false
+modulate = Color(1.5, 1.5, 1.5, 1)
+position = Vector2(408, 558)
+rotation = -3.32136
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_jvemm")
+
+[node name="GruntModel" type="AnimatedSprite2D" parent="Decorations"]
+visible = false
+position = Vector2(1162, 194)
+rotation = -0.443314
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_fxo21")
+
+[node name="SniperModel" type="AnimatedSprite2D" parent="Decorations"]
+visible = false
+position = Vector2(1480, 772)
+rotation = 0.268781
+scale = Vector2(0.625922, 0.625922)
+sprite_frames = SubResource("SpriteFrames_elthq")
+
+[connection signal="area_entered" from="StartButton" to="." method="_on_start_hit"]
+[connection signal="area_entered" from="QuitButton" to="." method="_on_quit_hit"]

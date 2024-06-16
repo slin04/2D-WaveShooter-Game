@@ -28,9 +28,11 @@ var alive = true
 var invincible = false
 
 var can_regen = true
-var regenStartingAmount = 5
+var regenStartingAmount = 3
 var regenAmount = regenStartingAmount
-var regenIncrementAmount = 1
+var regenIncrementAmount = 0.8
+
+var id = "player"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -66,7 +68,7 @@ func _process(delta):
 		processShooting(delta)
 		rotation = get_global_mouse_position().angle_to_point(position)
 		processWallBounce()
-		#processAbility()
+		processAbility()
 	else:
 		handleDeath()
 	
@@ -82,7 +84,9 @@ func processAbility():
 	if Input.is_action_just_pressed("rightClick"):
 		var mousePosition = get_viewport().get_mouse_position()
 		var angle = position.angle_to_point(mousePosition)
-		dashVelocity = Vector2(2000,0).rotated(angle)
+		dashVelocity = Vector2(2500,0).rotated(angle)
+		handleInvincibleFrame(0.5)
+		
 		
 func handleDeath():
 	alive = false
@@ -113,7 +117,7 @@ func processMovement(delta):
 	knockbackVelocity = knockbackVelocity * 0.7
 	
 	velocity += dashVelocity
-	dashVelocity = dashVelocity * 0.85
+	dashVelocity = dashVelocity * 0.9
 		
 	position += velocity * delta
 	
@@ -171,7 +175,18 @@ func processWallBounce():
 	elif (position.y >= screen_size.y):
 		bounceVelocity.y = -bounceForce
 
-func _on_enemy_bullet_collision(area):
+func _on_object_collision(area):
+	match area.id:
+		"enemy_bullet":
+			handleBullet(area)
+		"health_orb":
+			handleHealthOrb(area)
+		"dasher":
+			handleDasher(area)
+			
+
+		
+func handleBullet(area):
 	if !invincible:
 		knockbackVelocity += area.velocity/5.0 
 		area.queue_free()
@@ -181,18 +196,36 @@ func _on_enemy_bullet_collision(area):
 		$HealthRegenTimer.start()
 		if (health <= 0):
 			handleDeath()
-		handleInvincibleFrame()
+		handleInvincibleFrame(iframeTime)
 		
-func handleInvincibleFrame():
+func handleHealthOrb(area):
+	area.queue_free()
+	health += area.amount
+	$OrbCollectSound.play()
+	
+func handleDasher(area):
+	if !invincible:
+		knockbackVelocity += area.velocity/5.0 
+		$HitSound.play()
+		health -= area.getDamage()
+		can_regen = false
+		$HealthRegenTimer.start()
+		if (health <= 0):
+			handleDeath()
+		handleInvincibleFrame(iframeTime)
+		
+func handleInvincibleFrame(time):
 	invincible = true
+	$iFrameTimer.wait_time = time
 	$PlayerModel.animation = "on_hit"
-	$PlayerModel.play()
-	await get_tree().create_timer(iframeTime, false).timeout
-	$PlayerModel.animation = "default"
-	$PlayerModel.stop()
-	invincible = false	
+	$iFrameTimer.start()
 
 
 func _on_health_regen_timer_timeout():
 	can_regen = true
 	regenAmount = regenStartingAmount
+
+
+func _on_i_frame_timer_timeout():
+	invincible = false
+	$PlayerModel.animation = "default"

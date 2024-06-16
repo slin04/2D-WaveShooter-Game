@@ -5,11 +5,14 @@ var spawnRate = 5
 @export var grunt_scene: PackedScene
 @export var sniper_scene: PackedScene
 @export var brawler_scene: PackedScene
+@export var dasher_scene: PackedScene
 
 @export var player_scene: PackedScene
 @export var healthbar_scene: PackedScene
 
-var enemyTypes = ["grunt", "sniper", "brawler"]
+@export var orb_scene: PackedScene
+
+var enemyTypes = ["grunt", "sniper", "brawler", "dasher"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,11 +20,18 @@ func _ready():
 	$SpawnTimer.wait_time = spawnRate
 	Global.startTime = Time.get_unix_time_from_system()
 	
+func fadeIn():
+	var tween = get_tree().create_tween().set_parallel(true)
+	$Background.set_color(Color(1,1,1))
+	tween.tween_property($Background, "color", Color(0.1,0.15,0.2), 2).set_trans(Tween.TRANS_LINEAR)
+	
+	
 func game_start():
+	fadeIn()
 	spawnPlayer()
 	Global.onGameStart()
 	waveOne()
-	#$Music.play()
+	$Music.play()
 	
 func spawnPlayer():
 	var player = player_scene.instantiate()
@@ -31,7 +41,6 @@ func spawnPlayer():
 func setHealthBar():
 	var healthbar = healthbar_scene.instantiate()
 	add_child(healthbar)
-	
 	
 func waveOne():
 	await get_tree().create_timer(1, false).timeout
@@ -67,8 +76,7 @@ func waveOne():
 func waveTwo():
 	await get_tree().create_timer(1, false).timeout
 	
-	spawnEnemy(4, "grunt")	
-	spawnEnemy(1, "sniper")	
+	spawnEnemy(4, "dasher")
 	
 	while(true):
 		if (Global.Player == null):
@@ -79,6 +87,7 @@ func waveTwo():
 		
 	spawnEnemy(3, "grunt")	
 	spawnEnemy(2, "brawler")	
+	spawnEnemy(1, "dasher")
 	
 	while(true):
 		if (Global.Player == null):
@@ -99,7 +108,6 @@ func _process(delta):
 	#print("Enemy Count: " + str(Global.enemyNum()))
 	#checkPause()
 	
-# fix this
 func checkPause():
 	if Input.is_action_pressed("pause"):
 		get_tree().paused = !get_tree().paused
@@ -107,8 +115,11 @@ func checkPause():
 		
 func setGameOver():
 	Global.onGameEnd()
-	await get_tree().create_timer(1, false).timeout
-	get_tree().change_scene_to_file("res://death_screen.tscn")
+	var tween = get_tree().create_tween().set_parallel(true)
+	tween.tween_property($Music, "pitch_scale", 0.5, 3).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property($Music, "volume_db", -40, 3).set_trans(Tween.TRANS_QUAD)
+	await get_tree().create_timer(3, false).timeout
+	get_tree().change_scene_to_file("res://code/death_screen.tscn")
 		
 	
 func updateUI(delta):
@@ -126,7 +137,7 @@ func updateHP():
 func updateScore():
 	if (Global.Player != null):
 		$HUD/XPLabel.text = "XP: " + str(int(Global.score))
-
+		
 
 func _on_player_shoot(Bullet, direction, location):
 	var spawned_bullet = Bullet.instantiate()
@@ -166,6 +177,9 @@ func spawnEnemy(num, type):
 			"brawler":
 				enemy = brawler_scene.instantiate()
 				Global.brawlerNum += 1
+			"dasher":
+				enemy = dasher_scene.instantiate()
+				Global.dasherNum += 1
 		var spawnLocation = $EnemySpawner/EnemySpawnLocation
 		spawnLocation.progress_ratio = randf()
 		enemy.position = spawnLocation.position
@@ -183,5 +197,16 @@ func entityShoot(Bullet, direction, location, damage, velocity):
 	spawned_bullet.acceleration = -spawned_bullet.acceleration.rotated(direction)
 	spawned_bullet.damage = damage
 	
+func spawnHealthOrb(position, num):
+	for i in num:
+		var orb
+		orb = orb_scene.instantiate()
+		orb.position = position
+		add_child(orb)
+	
 
 	
+
+
+func _on_music_finished():
+	$Music.play()

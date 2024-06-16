@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://bmdh2l8clerqj"]
+
+[ext_resource type="Script" path="res://code/start_player.gd" id="1_uq2ok"]
+[ext_resource type="Texture2D" uid="uid://cv4kdj5hok6fi" path="res://images/newPlayer.png" id="2_q6c3j"]
+[ext_resource type="Texture2D" uid="uid://bhtnmgpyfft3r" path="res://images/playerHit.png" id="3_o1f8v"]
+[ext_resource type="Texture2D" uid="uid://cderq6wpgh5gc" path="res://images/playerHit2.png" id="4_n178r"]
+[ext_resource type="AudioStream" uid="uid://dj3wr6jtc2cbu" path="res://sounds/playershoot.wav" id="5_woed3"]
+[ext_resource type="AudioStream" uid="uid://cw77p4thprlcb" path="res://sounds/playerhit.wav" id="6_jngpl"]
+[ext_resource type="AudioStream" uid="uid://s1kgksojs7x5" path="res://sounds/playerDeath.wav" id="7_83gci"]
+[ext_resource type="AudioStream" uid="uid://cy5bany0ehppu" path="res://sounds/orb_collect.wav" id="8_8beeu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kbac6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q6c3j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.25,
+"texture": ExtResource("3_o1f8v")
+}, {
+"duration": 0.5,
+"texture": ExtResource("4_n178r")
+}],
+"loop": true,
+"name": &"on_hit",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xm752"]
+radius = 43.1856
+
+[node name="StartPlayer" type="Area2D"]
+process_mode = 1
+position = Vector2(551, 332)
+collision_mask = 9
+script = ExtResource("1_uq2ok")
+
+[node name="PlayerModel" type="AnimatedSprite2D" parent="."]
+modulate = Color(1.5, 1.5, 1.5, 1)
+position = Vector2(-3, -3)
+scale = Vector2(1e-05, 1e-05)
+sprite_frames = SubResource("SpriteFrames_kbac6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 8
+shape = SubResource("CircleShape2D_xm752")
+
+[node name="GunSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_woed3")
+volume_db = -8.169
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_jngpl")
+volume_db = -7.836
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_83gci")
+volume_db = -10.685
+
+[node name="HealthRegenTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="OrbCollectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_8beeu")
+volume_db = -11.397
+
+[connection signal="area_entered" from="." to="." method="_on_object_collision"]
+[connection signal="timeout" from="HealthRegenTimer" to="." method="_on_health_regen_timer_timeout"]

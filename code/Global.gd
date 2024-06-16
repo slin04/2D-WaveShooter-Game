@@ -4,6 +4,7 @@ var Player
 var gruntNum 
 var sniperNum
 var brawlerNum
+var dasherNum
 
 var score
 var enemiesKilled
@@ -22,6 +23,7 @@ func onGameStart():
 	gruntNum = 0
 	sniperNum = 0
 	brawlerNum = 0
+	dasherNum = 0
 	score = 0
 	enemiesKilled = 0
 	
@@ -30,7 +32,7 @@ func onGameEnd():
 
 	
 func enemyNum():
-	return gruntNum + sniperNum + brawlerNum
+	return gruntNum + sniperNum + brawlerNum + dasherNum
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

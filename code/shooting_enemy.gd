@@ -24,7 +24,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#checkHealth()
 	checkShouldDespawn()
 	trackPlayer()
 	processShooting()
@@ -73,6 +72,7 @@ func processDirection():
 		changeDirection = true
 
 	
+
 func followPlayer(delta):
 	var distance = position.distance_to(playerPosition)
 	var acceleration = Vector2(0,0)

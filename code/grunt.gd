@@ -1,5 +1,6 @@
 extends shootingEnemy
 
+var hit = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -41,7 +42,6 @@ func checkShouldDespawn():
 		await get_tree().create_timer(0.1, false).timeout
 		queue_free()
 	
-
 func checkHealth():
 	if (health <= 0):
 		attacking = false
@@ -49,7 +49,16 @@ func checkHealth():
 		if !$GruntDeathSound.playing:
 			$GruntDeathSound.play()
 		await get_tree().create_timer(0.2, false).timeout
+		dropHealthOrb()
 		queue_free()
+		
+func dropHealthOrb():
+	var roll = randf_range(0, 1)
+	if (roll < 0.1):
+		Main.spawnHealthOrb(position, 3)
+	elif (roll < 0.3):
+		Main.spawnHealthOrb(position, 1)
+	
 		
 func _exit_tree():
 	Global.gruntNum -= 1
@@ -57,12 +66,14 @@ func _exit_tree():
 		Global.score += score
 		Global.enemiesKilled += 1
 	
+	
 func playHitAnimation():
-	$HitSound.play()
 	$GruntModel.animation = "on_hit"
-	await get_tree().create_timer(0.2).timeout
+	$Timer.start();
+	
+func _on_timer_timeout():
 	$GruntModel.animation = "default"
 	
 func shootBullet():
 	Main.entityShoot(Bullet, rotation, position, attackDamage, 1250)
-	
+

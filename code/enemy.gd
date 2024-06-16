@@ -2,8 +2,8 @@ extends Area2D
 
 class_name abstractEnemy
 
-var health
-var score
+var health # enemy health
+var score  # score that enemy yields
 var bounceForce
 
 var velocity 
@@ -18,13 +18,15 @@ var playerPosition
 var screen_size
 var Main
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	setWorld()
 	playerPosition = Vector2(0,0)
 	velocity = Vector2(0,0)
+	
+func setWorld():
+	screen_size = get_viewport_rect().size
+	Main = get_parent()
 	
 func spawnAnimation():
 	await get_tree().create_timer(0.01, false).timeout
@@ -36,9 +38,10 @@ func spawnAnimation():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	checkShouldDespawn()
-	#checkHealth()
 	trackPlayer()
 	processPhysics(delta)
+	
+	
 	
 func processPhysics(delta):
 	processWallBounce()
@@ -54,10 +57,7 @@ func processPhysics(delta):
 	
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
-	
-func setWorld():
-	screen_size = get_viewport_rect().size
-	Main = get_parent()
+
 	
 func trackPlayer():
 	if (Global.Player != null):
@@ -80,6 +80,7 @@ func _on_area_entered(area):
 	area.queue_free()
 	health -= area.damage
 	playHitAnimation()
+	$HitSound.play()
 	checkHealth()
 	
 #abstract
@@ -92,6 +93,9 @@ func checkShouldDespawn():
 	
 # abstract
 func checkHealth(): 
+	push_error()
+	
+func dropHealthOrb():
 	push_error()
 	
 

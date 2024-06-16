@@ -52,21 +52,35 @@ func checkHealth():
 		if !$GruntDeathSound.playing:
 			$GruntDeathSound.play()
 		await get_tree().create_timer(0.2, false).timeout
+		dropHealthOrb()
 		queue_free()
+		
+func dropHealthOrb():
+	var roll = randf_range(0, 1)
+	if (roll < 0.15):
+		Main.spawnHealthOrb(position, 4)
+	elif (roll < 0.4):
+		Main.spawnHealthOrb(position, 2)
 		
 func _exit_tree():
 	Global.brawlerNum -= 1
 	if !attacking: # enemy was killed
 		Global.score += score
 		Global.enemiesKilled += 1
+
 	
 func playHitAnimation():
-	$HitSound.play()
 	$BrawlerModel.animation = "on_hit"
-	await get_tree().create_timer(0.2, false).timeout
+	$Timer.start();
+	
+func _on_timer_timeout():
 	$BrawlerModel.animation = "default"
+	
+	
 	
 func shootBullet():
 	Main.entityShoot(Bullet, rotation, position, attackDamage, bulletVelocity)
 	Main.entityShoot(Bullet, rotation + PI/12.0, position, attackDamage, bulletVelocity)
 	Main.entityShoot(Bullet, rotation - PI/12.0, position, attackDamage, bulletVelocity)
+
+
