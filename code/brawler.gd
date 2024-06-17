@@ -13,7 +13,7 @@ func _ready():
 	reloaded = true
 	
 func setProperties():
-	health = 80
+	health = 60
 	score = 15
 	velocity = Vector2(0,0)
 	speed = 50

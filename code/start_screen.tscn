@@ -1,16 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://bvu5oa601a3tn"]
+[gd_scene load_steps=8 format=3 uid="uid://bvu5oa601a3tn"]
 
 [ext_resource type="Script" path="res://code/start_screen.gd" id="1_khpj1"]
 [ext_resource type="PackedScene" uid="uid://bmdh2l8clerqj" path="res://code/start_player.tscn" id="2_grwgm"]
 [ext_resource type="AudioStream" uid="uid://dj3wr6jtc2cbu" path="res://sounds/playershoot.wav" id="2_xpwvb"]
 [ext_resource type="AudioStream" uid="uid://dlq6ofgaglnk3" path="res://sounds/gruntDeath.wav" id="3_4o7p2"]
-[ext_resource type="Texture2D" uid="uid://cv4kdj5hok6fi" path="res://images/newPlayer.png" id="4_5myj0"]
-[ext_resource type="Texture2D" uid="uid://bhtnmgpyfft3r" path="res://images/playerHit.png" id="5_rub48"]
-[ext_resource type="Texture2D" uid="uid://cderq6wpgh5gc" path="res://images/playerHit2.png" id="6_m7wlx"]
-[ext_resource type="Texture2D" uid="uid://c0glypuda8rj8" path="res://images/grunt.png" id="9_t8hsw"]
-[ext_resource type="Texture2D" uid="uid://dprfpj8g5hity" path="res://images/gruntHit.png" id="10_7uwq8"]
-[ext_resource type="Texture2D" uid="uid://bpwkmuqn37gxg" path="res://images/sniper.png" id="12_evkgr"]
-[ext_resource type="Texture2D" uid="uid://ceu6ij7fn2i8d" path="res://images/sniper_hit.png" id="13_0kjba"]
 
 [sub_resource type="Environment" id="Environment_8co57"]
 background_mode = 3
@@ -30,66 +23,6 @@ size = Vector2(327, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kihc3"]
 size = Vector2(310.5, 50)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_jvemm"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_5myj0")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 0.25,
-"texture": ExtResource("5_rub48")
-}, {
-"duration": 0.5,
-"texture": ExtResource("6_m7wlx")
-}],
-"loop": true,
-"name": &"on_hit",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fxo21"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("9_t8hsw")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("10_7uwq8")
-}],
-"loop": true,
-"name": &"on_hit",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_elthq"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("12_evkgr")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("13_0kjba")
-}],
-"loop": true,
-"name": &"on_hit",
-"speed": 5.0
-}]
 
 [node name="Start Screen" type="Node2D"]
 script = ExtResource("1_khpj1")
@@ -166,34 +99,6 @@ pitch_scale = 1.48
 stream = ExtResource("3_4o7p2")
 volume_db = -10.063
 pitch_scale = 1.47
-
-[node name="Decorations" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="PlayerModel" type="AnimatedSprite2D" parent="Decorations"]
-visible = false
-modulate = Color(1.5, 1.5, 1.5, 1)
-position = Vector2(408, 558)
-rotation = -3.32136
-scale = Vector2(0.6, 0.6)
-sprite_frames = SubResource("SpriteFrames_jvemm")
-
-[node name="GruntModel" type="AnimatedSprite2D" parent="Decorations"]
-visible = false
-position = Vector2(1162, 194)
-rotation = -0.443314
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_fxo21")
-
-[node name="SniperModel" type="AnimatedSprite2D" parent="Decorations"]
-visible = false
-position = Vector2(1480, 772)
-rotation = 0.268781
-scale = Vector2(0.625922, 0.625922)
-sprite_frames = SubResource("SpriteFrames_elthq")
 
 [connection signal="area_entered" from="StartButton" to="." method="_on_start_hit"]
 [connection signal="area_entered" from="QuitButton" to="." method="_on_quit_hit"]

@@ -14,7 +14,7 @@ func _ready():
 
 	
 func setProperties():
-	health = 60
+	health = 40
 	score = 10
 	velocity = Vector2(0,0)
 	speed = 100

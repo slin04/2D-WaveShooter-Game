@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://boml0r5ur2kfw" path="res://code/health_bar.tscn" id="6_rcq8m"]
 [ext_resource type="Script" path="res://code/pause.gd" id="9_6gdki"]
 [ext_resource type="PackedScene" uid="uid://clpwuu5ewhadp" path="res://code/health_orb.tscn" id="10_b7lj1"]
-[ext_resource type="AudioStream" uid="uid://cdda5ab3t210p" path="res://sounds/game_music.wav" id="10_kr7x1"]
+[ext_resource type="AudioStream" uid="uid://cxy5c5qn4kvgm" path="res://sounds/game_music.wav" id="10_kr7x1"]
 [ext_resource type="PackedScene" uid="uid://dtwtd0qa51cnn" path="res://code/dasher.tscn" id="11_ayldk"]
 
 [sub_resource type="Environment" id="Environment_epgnu"]
