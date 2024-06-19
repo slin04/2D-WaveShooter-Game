@@ -25,8 +25,8 @@ func _ready():
 	velocity = Vector2(0,0)
 	
 func setWorld():
-	screen_size = get_viewport_rect().size
 	Main = get_parent()
+	screen_size = Main.get_arena_size()
 	
 func spawnAnimation():
 	await get_tree().create_timer(0.01, false).timeout

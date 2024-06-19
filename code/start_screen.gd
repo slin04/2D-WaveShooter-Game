@@ -57,6 +57,7 @@ func _on_start_hit(area):
 	tween2.tween_property($Background, "color", Color(1,1,1), 1).set_trans(Tween.TRANS_QUART)
 	
 	_start_game()
+	
 
 
 func _on_quit_hit(area):
@@ -69,3 +70,6 @@ func _on_quit_hit(area):
 	tween2.tween_property($Background, "color", Color(1,1,1), 1).set_trans(Tween.TRANS_QUART)
 	
 	_on_quit_pressed()
+	
+func get_arena_size():
+	return get_viewport_rect().size 

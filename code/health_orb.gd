@@ -16,7 +16,7 @@ var screen_size
 func _ready():
 	$Timer.wait_time = 5
 	$Timer.start()
-	screen_size = get_viewport_rect().size
+	screen_size = get_parent().get_arena_size()
 	velocity += Vector2(randf_range(-1,1), randf_range(-1,1)) * 1000
 	$OrbModel.animation = "fresh"
 	$SpawnSound.play()

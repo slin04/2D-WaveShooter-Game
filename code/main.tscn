@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dqn3g8reiy8kc"]
+[gd_scene load_steps=13 format=3 uid="uid://dqn3g8reiy8kc"]
 
 [ext_resource type="Script" path="res://code/main.gd" id="1_862m1"]
 [ext_resource type="PackedScene" uid="uid://bamp35jrqrnh" path="res://code/player.tscn" id="1_dkm27"]
@@ -15,21 +15,16 @@
 [sub_resource type="Environment" id="Environment_epgnu"]
 background_mode = 3
 glow_enabled = true
-glow_levels/1 = 1.5
-glow_levels/2 = 1.96
-glow_levels/3 = 1.36
-glow_levels/4 = 0.36
-glow_levels/5 = 0.36
-glow_intensity = 1.37
-glow_strength = 1.1
-glow_bloom = 0.14
+glow_levels/1 = 0.34
+glow_levels/2 = 1.18
+glow_levels/3 = 1.1
+glow_levels/4 = 0.23
+glow_levels/5 = 0.13
+glow_intensity = 1.8
+glow_strength = 1.09
+glow_bloom = 0.12
 glow_blend_mode = 1
-
-[sub_resource type="Curve2D" id="Curve2D_r3of6"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1920, 0, 0, 0, 0, 0, 1920, 1080, 0, 0, 0, 0, 0, 1080, 0, 0, 0, 0, 0, 0)
-}
-point_count = 5
+glow_hdr_threshold = 0.85
 
 [node name="Main" type="Node"]
 process_mode = 1
@@ -45,23 +40,64 @@ orb_scene = ExtResource("10_b7lj1")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_epgnu")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Arena" type="ColorRect" parent="."]
 modulate = Color(0.360784, 0.364706, 0.360784, 1)
 z_index = -1
 z_as_relative = false
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_right = 3840.0
+offset_bottom = 2160.0
 color = Color(0.101961, 0.14902, 0.2, 1)
 
-[node name="BackgroundGrid" type="Sprite2D" parent="."]
-modulate = Color(0.207843, 0.207843, 0.192157, 0.196078)
+[node name="BackgroundGrid" type="Sprite2D" parent="Arena"]
+modulate = Color(0.478431, 0.478431, 0.45098, 0.196078)
 position = Vector2(960, 540)
 texture = ExtResource("3_8f00t")
 
-[node name="EnemySpawner" type="Path2D" parent="."]
-curve = SubResource("Curve2D_r3of6")
+[node name="BackgroundGrid2" type="Sprite2D" parent="Arena"]
+modulate = Color(0.478431, 0.478431, 0.45098, 0.196078)
+position = Vector2(2880, 540)
+texture = ExtResource("3_8f00t")
 
-[node name="EnemySpawnLocation" type="PathFollow2D" parent="EnemySpawner"]
+[node name="BackgroundGrid3" type="Sprite2D" parent="Arena"]
+modulate = Color(0.478431, 0.478431, 0.45098, 0.196078)
+position = Vector2(960, 1620)
+texture = ExtResource("3_8f00t")
+
+[node name="BackgroundGrid4" type="Sprite2D" parent="Arena"]
+modulate = Color(0.478431, 0.478431, 0.45098, 0.196078)
+position = Vector2(2880, 1620)
+texture = ExtResource("3_8f00t")
+
+[node name="ColorRect" type="ColorRect" parent="Arena"]
+z_index = -1
+layout_mode = 0
+offset_left = -1928.0
+offset_top = -1448.0
+offset_right = 6312.0
+offset_bottom = 4113.0
+color = Color(0.0666667, 0.0823529, 0.101961, 1)
+
+[node name="Border" type="Node2D" parent="."]
+modulate = Color(0.890196, 0.937255, 0.980392, 1)
+position = Vector2(-20, -20)
+
+[node name="BorderTop" type="ColorRect" parent="Border"]
+offset_right = 3880.0
+offset_bottom = 20.0
+
+[node name="BorderBottom" type="ColorRect" parent="Border"]
+offset_top = 2180.0
+offset_right = 3880.0
+offset_bottom = 2200.0
+
+[node name="BorderLeft" type="ColorRect" parent="Border"]
+offset_right = 20.0
+offset_bottom = 2200.0
+
+[node name="Border Right" type="ColorRect" parent="Border"]
+offset_left = 3880.0
+offset_right = 3900.0
+offset_bottom = 2200.0
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 3.0
@@ -70,77 +106,62 @@ wait_time = 3.0
 stream = ExtResource("10_kr7x1")
 volume_db = -15.928
 
-[node name="HUD" type="Node2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HP" type="Label" parent="HUD"]
+[node name="HUD" type="Node2D" parent="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HUD"]
 visible = false
-offset_left = 1620.0
-offset_top = 20.0
-offset_right = 1782.0
-offset_bottom = 89.0
-theme_override_font_sizes/font_size = 50
-text = "HP:"
-horizontal_alignment = 1
+offset_right = 385.0
+offset_bottom = 107.0
+color = Color(0, 0, 0, 1)
 
-[node name="HPValue" type="Label" parent="HUD"]
-visible = false
-offset_left = 1760.0
-offset_top = 20.0
-offset_right = 1855.0
-offset_bottom = 89.0
-theme_override_font_sizes/font_size = 50
-text = "100
-"
-
-[node name="XPLabel" type="Label" parent="HUD"]
-modulate = Color(1.2, 1.2, 1.2, 1)
+[node name="XPLabel" type="Label" parent="CanvasLayer/HUD"]
+modulate = Color(1, 1, 1, 0.32549)
 self_modulate = Color(1.2, 1.2, 1.2, 1)
-offset_top = 20.0
-offset_right = 1920.0
-offset_bottom = 89.0
-theme_override_font_sizes/font_size = 50
+offset_left = 41.0
+offset_top = 11.0
+offset_right = 510.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 30
 text = "XP: 0
 "
-horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Pause" type="ColorRect" parent="."]
+[node name="Pause" type="ColorRect" parent="CanvasLayer"]
 process_mode = 3
-visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 0.690196)
 script = ExtResource("9_6gdki")
 
-[node name="Game Paused" type="Label" parent="Pause"]
+[node name="Game Paused" type="Label" parent="CanvasLayer/Pause"]
 layout_mode = 0
 offset_left = 260.0
 offset_top = 390.0
 offset_right = 1660.0
 offset_bottom = 690.0
-theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_colors/font_color = Color(0.921569, 0.921569, 0.921569, 1)
 theme_override_font_sizes/font_size = 200
 text = "GAME PAUSED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Esc Instruction" type="Label" parent="Pause"]
+[node name="Esc Instruction" type="Label" parent="CanvasLayer/Pause"]
 layout_mode = 0
 offset_left = 260.0
-offset_top = 990.0
+offset_top = 950.0
 offset_right = 1660.0
-offset_bottom = 1060.0
-theme_override_colors/font_color = Color(0.627451, 0.627451, 0.627451, 1)
+offset_bottom = 1020.0
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_font_sizes/font_size = 50
 text = "Press [Esc] to resume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="DeathCamera" type="Camera2D" parent="."]
+visible = false
+enabled = false
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="finished" from="Music" to="." method="_on_music_finished"]

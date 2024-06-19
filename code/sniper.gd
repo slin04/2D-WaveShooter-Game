@@ -16,11 +16,11 @@ func setProperties():
 	health = 40
 	score = 20
 	velocity = Vector2(0,0)
-	speed = 50
-	maxSpeed = 600
+	speed = 40
+	maxSpeed = 300
 	fireRate = 1.4
 	attackDamage = 20
-	followRange = Vector2(800, 1000)
+	followRange = Vector2(300, 1000)
 	bounceForce = 300
 	spawnVelocity = Vector2(randf_range(-500,500), randf_range(-500,500))
 	waitTime = 1.0

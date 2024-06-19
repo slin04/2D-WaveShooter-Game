@@ -1,6 +1,7 @@
 extends Node
 
 var spawnRate = 5
+var screen_size
 
 @export var grunt_scene: PackedScene
 @export var sniper_scene: PackedScene
@@ -20,10 +21,13 @@ func _ready():
 	$SpawnTimer.wait_time = spawnRate
 	Global.startTime = Time.get_unix_time_from_system()
 	
+func get_arena_size():
+	return $Arena.get_size()
+	
 func fadeIn():
 	var tween = get_tree().create_tween().set_parallel(true)
-	$Background.set_color(Color(1,1,1))
-	tween.tween_property($Background, "color", Color(0.1,0.15,0.2), 2).set_trans(Tween.TRANS_LINEAR)
+	$Arena.set_color(Color(1,1,1))
+	tween.tween_property($Arena, "color", Color(0.1,0.15,0.2), 2).set_trans(Tween.TRANS_LINEAR)
 	
 	
 func game_start():
@@ -120,23 +124,21 @@ func setGameOver():
 	tween.tween_property($Music, "volume_db", -40, 3).set_trans(Tween.TRANS_QUAD)
 	await get_tree().create_timer(3, false).timeout
 	get_tree().change_scene_to_file("res://code/death_screen.tscn")
+	
+func setDeathCamera(player_position):
+	$DeathCamera.position = player_position
+	$DeathCamera.set_enabled(true)
 		
 	
 func updateUI(delta):
 	if (Global.Player != null):
 		Global.score += delta 
-	updateHP()
 	updateScore()
 		
-func updateHP():
-	if (Global.Player != null):
-		$HUD/HPValue.text = str(int(Global.Player.health))
-	else:
-		$HUD/HPValue.text = "0"
 	
 func updateScore():
 	if (Global.Player != null):
-		$HUD/XPLabel.text = "XP: " + str(int(Global.score))
+		$CanvasLayer/HUD/XPLabel.text = "XP: " + str(int(Global.score))
 		
 
 func _on_player_shoot(Bullet, direction, location):
@@ -165,6 +167,7 @@ func _on_spawn_timer_timeout():
 		
 		
 func spawnEnemy(num, type):
+	var spawnLocation = Vector2(randi() % int(get_arena_size().x + 1),randi() % int(get_arena_size().y + 1))
 	for i in num:
 		var enemy
 		match type:
@@ -180,9 +183,8 @@ func spawnEnemy(num, type):
 			"dasher":
 				enemy = dasher_scene.instantiate()
 				Global.dasherNum += 1
-		var spawnLocation = $EnemySpawner/EnemySpawnLocation
-		spawnLocation.progress_ratio = randf()
-		enemy.position = spawnLocation.position
+		enemy.position = spawnLocation + Vector2(randi() % 100, randi() % 100)
+		enemy.position.clamp(Vector2.ZERO, get_arena_size())
 		add_child(enemy)
 		await get_tree().create_timer(0.5 + randf(), false).timeout
 	
@@ -204,9 +206,5 @@ func spawnHealthOrb(position, num):
 		orb.position = position
 		add_child(orb)
 	
-
-	
-
-
 func _on_music_finished():
 	$Music.play()

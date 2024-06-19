@@ -38,10 +38,14 @@ var id = "player"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	spawnAnimation()
-	screen_size = get_viewport_rect().size
-	position = get_viewport_rect().size/2
 	$PlayerModel.animation = "default"
 	Main = get_parent()
+	screen_size = Main.get_arena_size()
+	position = screen_size/2
+	$PlayerCamera.set_limit(SIDE_LEFT,0 - 300)
+	$PlayerCamera.set_limit(SIDE_TOP, 0 - 300)
+	$PlayerCamera.set_limit(SIDE_RIGHT, screen_size.x + 300)
+	$PlayerCamera.set_limit(SIDE_BOTTOM, screen_size.y + 300)
 	Global.Player = self
 	health = maxHealth
 	velocity += Vector2(randf_range(-500,500), randf_range(-500,500))
@@ -57,6 +61,7 @@ func spawnAnimation():
 func _exit_tree():
 	Global.gameOver = true
 	Main.setGameOver()
+	Main.setDeathCamera(position)
 	Global.Player = null
 
 
@@ -152,13 +157,6 @@ func processShooting(delta):
 			
 func shootBullet():
 	Main.entityShoot(Bullet, rotation, position, attackDamage, 3000)
-	#Main.entityShoot(Bullet, rotation - 0.02*PI*randf_range(0.5, 1), position, attackDamage, 3000)
-	#Main.entityShoot(Bullet, rotation + 0.02*PI*randf_range(0.5, 1), position, attackDamage, 3000)
-	#Main.entityShoot(Bullet, rotation - 0.045*PI*randf_range(0.5, 1.5), position, attackDamage, 3000)
-	#Main.entityShoot(Bullet, rotation + 0.045*PI*randf_range(0.5, 1.5), position, attackDamage, 3000)
-	#Main.entityShoot(Bullet, rotation - 0.03*PI*randf_range(0.5, 2), position, attackDamage, 3000)
-	#Main.entityShoot(Bullet, rotation + 0.03*PI*randf_range(0.5, 2), position, attackDamage, 3000)
-
 	$GunSound.play()		
 			
 func processRecoil(delta):

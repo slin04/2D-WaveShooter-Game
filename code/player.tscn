@@ -42,9 +42,9 @@ modulate = Color(1.5, 1.5, 1.5, 1)
 position = Vector2(-3, -3)
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_kbac6")
-animation = &"on_hit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 visibility_layer = 8
 shape = SubResource("CircleShape2D_xm752")
 
@@ -69,6 +69,9 @@ stream = ExtResource("8_ey0xb")
 volume_db = -11.397
 
 [node name="iFrameTimer" type="Timer" parent="."]
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+position_smoothing_enabled = true
 
 [connection signal="area_entered" from="." to="." method="_on_object_collision"]
 [connection signal="timeout" from="HealthRegenTimer" to="." method="_on_health_regen_timer_timeout"]

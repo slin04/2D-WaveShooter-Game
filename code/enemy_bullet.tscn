@@ -15,10 +15,12 @@ script = ExtResource("1_43sj5")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("2_kyxki")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_oxjrh")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
