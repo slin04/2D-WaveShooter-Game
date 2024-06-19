@@ -29,4 +29,4 @@ func _process(delta):
 func _on_button_pressed():
 	$MenuSound.play()
 	await get_tree().create_timer(0.5, false).timeout
-	get_tree().change_scene_to_file("res://code/start_screen.tscn")
+	get_tree().change_scene_to_file("res://code/screens/start_screen.tscn")

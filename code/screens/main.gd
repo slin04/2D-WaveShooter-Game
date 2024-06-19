@@ -132,7 +132,7 @@ func setGameOver():
 	tween.tween_property($Music, "pitch_scale", 0.5, 3).set_trans(Tween.TRANS_QUAD)
 	tween.tween_property($Music, "volume_db", -40, 3).set_trans(Tween.TRANS_QUAD)
 	await get_tree().create_timer(3, false).timeout
-	get_tree().change_scene_to_file("res://code/death_screen.tscn")
+	get_tree().change_scene_to_file("res://code/screens/death_screen.tscn")
 	
 func setDeathCamera(player_position):
 	$DeathCamera.position = player_position

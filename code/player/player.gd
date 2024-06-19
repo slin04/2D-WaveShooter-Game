@@ -2,7 +2,7 @@ extends Area2D
 
 signal shoot(bullet, direction, location)
 
-var Bullet = preload("res://code/player_bullet.tscn")
+var Bullet = preload("res://code/projectiles/player_bullet.tscn")
 
 var Main 
 
@@ -51,11 +51,12 @@ func _ready():
 	velocity += Vector2(randf_range(-500,500), randf_range(-500,500))
 	
 func spawnAnimation():
-	self.scale = Vector2(0.1, 0.1)
-	await get_tree().create_timer(0.01, false).timeout
-	for i in 9:
-		await get_tree().create_timer(0.01, false).timeout
-		self.scale += Vector2(0.1, 0.1)
+	$PlayerModel.set_scale(Vector2(0,0))
+	var tween = get_tree().create_tween()
+	tween.tween_property($PlayerModel, "scale", Vector2(0.6,0.6), 1).set_trans(Tween.TRANS_QUART)
+	$PlayerCamera.set_zoom(Vector2(2,2))
+	tween.tween_property($PlayerCamera, "zoom", Vector2(1,1), 1).set_trans(Tween.TRANS_QUART)
+
 
 	
 func _exit_tree():

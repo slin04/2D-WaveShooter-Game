@@ -28,7 +28,7 @@ func _start_game():
 	$StartSound.play()
 	player.despawnAnimation()
 	await get_tree().create_timer(1, false).timeout
-	get_tree().change_scene_to_file("res://code/main.tscn")
+	get_tree().change_scene_to_file("res://code/screens/main.tscn")
 	
 
 func _on_quit_pressed():

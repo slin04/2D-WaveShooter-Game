@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://do6g0shwap66l"]
 
-[ext_resource type="Script" path="res://code/death_screen.gd" id="1_rfbv8"]
+[ext_resource type="Script" path="res://code/screens/death_screen.gd" id="1_rfbv8"]
 [ext_resource type="AudioStream" uid="uid://4h8t6o0vhmvr" path="res://sounds/gruntshoot.wav" id="2_3vp3t"]
 
 [sub_resource type="Environment" id="Environment_85djg"]

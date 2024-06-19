@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cbwca3duavh8t"]
 
 [ext_resource type="Texture2D" uid="uid://dgbp5s8gi0ggv" path="res://images/minion.png" id="1_2gxcp"]
-[ext_resource type="Script" path="res://code/minion.gd" id="1_t857h"]
+[ext_resource type="Script" path="res://code/enemies/minion.gd" id="1_t857h"]
 [ext_resource type="Texture2D" uid="uid://b01wqidpludkx" path="res://images/minion_hit.png" id="2_qlyre"]
 [ext_resource type="AudioStream" uid="uid://4h8t6o0vhmvr" path="res://sounds/gruntshoot.wav" id="3_vpx4s"]
 [ext_resource type="AudioStream" uid="uid://biymlwji45fr1" path="res://sounds/grunthit.wav" id="4_r0try"]

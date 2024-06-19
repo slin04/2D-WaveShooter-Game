@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dtwtd0qa51cnn"]
 
-[ext_resource type="Script" path="res://code/dasher.gd" id="1_70qv2"]
+[ext_resource type="Script" path="res://code/enemies/dasher.gd" id="1_70qv2"]
 [ext_resource type="Texture2D" uid="uid://b4fx74hm7217c" path="res://images/dasher.png" id="1_njqgp"]
 [ext_resource type="Texture2D" uid="uid://bmcd8u8jcccnl" path="res://images/dasher_attacking.png" id="2_q4wjm"]
 [ext_resource type="Texture2D" uid="uid://qpef6kx1nt86" path="res://images/dasher_charging.png" id="2_q7brg"]

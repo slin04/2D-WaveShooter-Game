@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bvu5oa601a3tn"]
 
-[ext_resource type="Script" path="res://code/start_screen.gd" id="1_khpj1"]
-[ext_resource type="PackedScene" uid="uid://bmdh2l8clerqj" path="res://code/start_player.tscn" id="2_grwgm"]
+[ext_resource type="Script" path="res://code/screens/start_screen.gd" id="1_khpj1"]
+[ext_resource type="PackedScene" uid="uid://bmdh2l8clerqj" path="res://code/screens/start_player.tscn" id="2_grwgm"]
 [ext_resource type="AudioStream" uid="uid://dj3wr6jtc2cbu" path="res://sounds/playershoot.wav" id="2_xpwvb"]
 [ext_resource type="AudioStream" uid="uid://dlq6ofgaglnk3" path="res://sounds/gruntDeath.wav" id="3_4o7p2"]
 

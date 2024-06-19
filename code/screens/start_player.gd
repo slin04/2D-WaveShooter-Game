@@ -2,7 +2,7 @@ extends Area2D
 
 signal shoot(bullet, direction, location)
 
-var Bullet = preload("res://code/player_bullet.tscn")
+var Bullet = preload("res://code/projectiles/player_bullet.tscn")
 
 var Main 
 

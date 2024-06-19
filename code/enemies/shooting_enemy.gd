@@ -2,7 +2,7 @@ extends abstractEnemy
 
 class_name shootingEnemy
 
-var Bullet = preload("res://code/enemy_bullet.tscn")
+var Bullet = preload("res://code/projectiles/enemy_bullet.tscn")
 
 var fireRate
 var attackDamage 

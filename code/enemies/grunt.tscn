@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://54p22p6d2w4"]
 
 [ext_resource type="Texture2D" uid="uid://c0glypuda8rj8" path="res://images/grunt.png" id="1_3xddg"]
-[ext_resource type="Script" path="res://code/grunt.gd" id="1_psjfb"]
+[ext_resource type="Script" path="res://code/enemies/grunt.gd" id="1_psjfb"]
 [ext_resource type="AudioStream" uid="uid://4h8t6o0vhmvr" path="res://sounds/gruntshoot.wav" id="3_al63h"]
 [ext_resource type="Texture2D" uid="uid://dprfpj8g5hity" path="res://images/gruntHit.png" id="3_syo76"]
 [ext_resource type="AudioStream" uid="uid://biymlwji45fr1" path="res://sounds/grunthit.wav" id="5_f3phl"]

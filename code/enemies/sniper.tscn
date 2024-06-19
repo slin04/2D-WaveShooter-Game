@@ -1,17 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://c30xo0su2aa4"]
+[gd_scene load_steps=9 format=3 uid="uid://cceen7an80ggm"]
 
-[ext_resource type="Script" path="res://code/brawler.gd" id="1_1n5ub"]
-[ext_resource type="Texture2D" uid="uid://cb748lvleutr5" path="res://images/brawler.png" id="2_ht65x"]
-[ext_resource type="Texture2D" uid="uid://dioaiq0pbrhmu" path="res://images/brawler_hit.png" id="3_ntrmu"]
-[ext_resource type="AudioStream" uid="uid://4h8t6o0vhmvr" path="res://sounds/gruntshoot.wav" id="4_qnfdu"]
-[ext_resource type="AudioStream" uid="uid://biymlwji45fr1" path="res://sounds/grunthit.wav" id="5_l0ft8"]
-[ext_resource type="AudioStream" uid="uid://dlq6ofgaglnk3" path="res://sounds/gruntDeath.wav" id="6_y0w7j"]
+[ext_resource type="Script" path="res://code/enemies/sniper.gd" id="1_isjxh"]
+[ext_resource type="Texture2D" uid="uid://bpwkmuqn37gxg" path="res://images/sniper.png" id="2_epp88"]
+[ext_resource type="Texture2D" uid="uid://ceu6ij7fn2i8d" path="res://images/sniper_hit.png" id="3_vyq56"]
+[ext_resource type="AudioStream" uid="uid://4h8t6o0vhmvr" path="res://sounds/gruntshoot.wav" id="4_v5tt2"]
+[ext_resource type="AudioStream" uid="uid://biymlwji45fr1" path="res://sounds/grunthit.wav" id="5_yka57"]
+[ext_resource type="AudioStream" uid="uid://dlq6ofgaglnk3" path="res://sounds/gruntDeath.wav" id="6_36xr7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wcby4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_ht65x")
+"texture": ExtResource("2_epp88")
 }],
 "loop": true,
 "name": &"default",
@@ -19,7 +19,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_ntrmu")
+"texture": ExtResource("3_vyq56")
 }],
 "loop": true,
 "name": &"on_hit",
@@ -29,13 +29,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_lu6jd"]
 radius = 41.0488
 
-[node name="Brawler" type="Area2D"]
+[node name="Sniper" type="Area2D"]
 collision_layer = 2
 collision_mask = 4
-script = ExtResource("1_1n5ub")
-metadata/_edit_group_ = true
+script = ExtResource("1_isjxh")
 
-[node name="BrawlerModel" type="AnimatedSprite2D" parent="."]
+[node name="SniperModel" type="AnimatedSprite2D" parent="."]
 position = Vector2(-35, -4)
 scale = Vector2(0.625922, 0.625922)
 sprite_frames = SubResource("SpriteFrames_wcby4")
@@ -44,17 +43,17 @@ sprite_frames = SubResource("SpriteFrames_wcby4")
 shape = SubResource("CircleShape2D_lu6jd")
 
 [node name="GunSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_qnfdu")
+stream = ExtResource("4_v5tt2")
 volume_db = -12.823
-pitch_scale = 0.92
+pitch_scale = 1.33
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_l0ft8")
+stream = ExtResource("5_yka57")
 volume_db = -15.671
 pitch_scale = 1.41
 
 [node name="GruntDeathSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_y0w7j")
+stream = ExtResource("6_36xr7")
 volume_db = -12.822
 
 [node name="Timer" type="Timer" parent="."]
