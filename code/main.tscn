@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dqn3g8reiy8kc"]
+[gd_scene load_steps=14 format=3 uid="uid://dqn3g8reiy8kc"]
 
 [ext_resource type="Script" path="res://code/main.gd" id="1_862m1"]
 [ext_resource type="PackedScene" uid="uid://bamp35jrqrnh" path="res://code/player.tscn" id="1_dkm27"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cceen7an80ggm" path="res://code/sniper.tscn" id="3_kdho6"]
 [ext_resource type="PackedScene" uid="uid://54p22p6d2w4" path="res://code/grunt.tscn" id="3_yahs6"]
 [ext_resource type="PackedScene" uid="uid://c30xo0su2aa4" path="res://code/brawler.tscn" id="4_5cubs"]
+[ext_resource type="PackedScene" uid="uid://cbwca3duavh8t" path="res://code/minion.tscn" id="6_h8pj8"]
 [ext_resource type="PackedScene" uid="uid://boml0r5ur2kfw" path="res://code/health_bar.tscn" id="6_rcq8m"]
 [ext_resource type="Script" path="res://code/pause.gd" id="9_6gdki"]
 [ext_resource type="PackedScene" uid="uid://clpwuu5ewhadp" path="res://code/health_orb.tscn" id="10_b7lj1"]
@@ -33,6 +34,7 @@ grunt_scene = ExtResource("3_yahs6")
 sniper_scene = ExtResource("3_kdho6")
 brawler_scene = ExtResource("4_5cubs")
 dasher_scene = ExtResource("11_ayldk")
+minion_scene = ExtResource("6_h8pj8")
 player_scene = ExtResource("1_dkm27")
 healthbar_scene = ExtResource("6_rcq8m")
 orb_scene = ExtResource("10_b7lj1")
@@ -110,12 +112,6 @@ volume_db = -15.928
 
 [node name="HUD" type="Node2D" parent="CanvasLayer"]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HUD"]
-visible = false
-offset_right = 385.0
-offset_bottom = 107.0
-color = Color(0, 0, 0, 1)
-
 [node name="XPLabel" type="Label" parent="CanvasLayer/HUD"]
 modulate = Color(1, 1, 1, 0.32549)
 self_modulate = Color(1.2, 1.2, 1.2, 1)
@@ -130,6 +126,7 @@ vertical_alignment = 1
 
 [node name="Pause" type="ColorRect" parent="CanvasLayer"]
 process_mode = 3
+visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 0.690196)

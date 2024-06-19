@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbwca3duavh8t"]
+
+[ext_resource type="Texture2D" uid="uid://dgbp5s8gi0ggv" path="res://images/minion.png" id="1_2gxcp"]
+[ext_resource type="Script" path="res://code/minion.gd" id="1_t857h"]
+[ext_resource type="Texture2D" uid="uid://b01wqidpludkx" path="res://images/minion_hit.png" id="2_qlyre"]
+[ext_resource type="AudioStream" uid="uid://4h8t6o0vhmvr" path="res://sounds/gruntshoot.wav" id="3_vpx4s"]
+[ext_resource type="AudioStream" uid="uid://biymlwji45fr1" path="res://sounds/grunthit.wav" id="4_r0try"]
+[ext_resource type="AudioStream" uid="uid://dlq6ofgaglnk3" path="res://sounds/gruntDeath.wav" id="5_q7ym4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wehfy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2gxcp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qlyre")
+}],
+"loop": true,
+"name": &"on_hit",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xq2w"]
+size = Vector2(67, 68)
+
+[node name="Minion" type="Area2D"]
+collision_mask = 5
+script = ExtResource("1_t857h")
+
+[node name="MinionModel" type="AnimatedSprite2D" parent="."]
+position = Vector2(7, -2)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_wehfy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_3xq2w")
+
+[node name="GunSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vpx4s")
+volume_db = -12.823
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_r0try")
+volume_db = -15.671
+pitch_scale = 1.41
+
+[node name="GruntDeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_q7ym4")
+volume_db = -12.822
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

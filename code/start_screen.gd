@@ -54,7 +54,7 @@ func _on_start_hit(area):
 	tween.tween_property($StartButton/StartLabel, "modulate", Color(0.8,0.9,1), 1).set_trans(Tween.TRANS_QUART)
 	
 	var tween2 = get_tree().create_tween()
-	tween2.tween_property($Background, "color", Color(1,1,1), 1).set_trans(Tween.TRANS_QUART)
+	tween2.tween_property($Background, "color", Color(0,0,0), 1).set_trans(Tween.TRANS_QUART)
 	
 	_start_game()
 	

@@ -72,6 +72,7 @@ volume_db = -11.397
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+position_smoothing_speed = 6.0
 
 [connection signal="area_entered" from="." to="." method="_on_object_collision"]
 [connection signal="timeout" from="HealthRegenTimer" to="." method="_on_health_regen_timer_timeout"]

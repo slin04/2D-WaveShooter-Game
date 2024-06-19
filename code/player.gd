@@ -73,7 +73,7 @@ func _process(delta):
 		processShooting(delta)
 		rotation = get_global_mouse_position().angle_to_point(position)
 		processWallBounce()
-		processAbility()
+		#processAbility()
 	else:
 		handleDeath()
 	
@@ -87,10 +87,11 @@ func processHealth(delta):
 		
 func processAbility():
 	if Input.is_action_just_pressed("rightClick"):
-		var mousePosition = get_viewport().get_mouse_position()
-		var angle = position.angle_to_point(mousePosition)
-		dashVelocity = Vector2(2500,0).rotated(angle)
-		handleInvincibleFrame(0.5)
+		var mousePosition = get_global_mouse_position()
+		position = mousePosition
+		#var angle = get_global_mouse_position().angle_to_point(position)
+		#dashVelocity = Vector2(-13000,0).rotated(angle)
+		handleInvincibleFrame(0.1)
 		
 		
 func handleDeath():
@@ -122,7 +123,7 @@ func processMovement(delta):
 	knockbackVelocity = knockbackVelocity * 0.7
 	
 	velocity += dashVelocity
-	dashVelocity = dashVelocity * 0.9
+	dashVelocity = dashVelocity * 0.8
 		
 	position += velocity * delta
 	
@@ -181,6 +182,8 @@ func _on_object_collision(area):
 			handleHealthOrb(area)
 		"dasher":
 			handleDasher(area)
+		"minion":
+			handleMinion(area)
 			
 
 		
@@ -202,6 +205,17 @@ func handleHealthOrb(area):
 	$OrbCollectSound.play()
 	
 func handleDasher(area):
+	if !invincible:
+		knockbackVelocity += area.velocity/5.0 
+		$HitSound.play()
+		health -= area.getDamage()
+		can_regen = false
+		$HealthRegenTimer.start()
+		if (health <= 0):
+			handleDeath()
+		handleInvincibleFrame(iframeTime)
+		
+func handleMinion(area):
 	if !invincible:
 		knockbackVelocity += area.velocity/5.0 
 		$HitSound.play()

@@ -42,7 +42,6 @@ func _process(delta):
 	processPhysics(delta)
 	
 	
-	
 func processPhysics(delta):
 	processWallBounce()
 	
@@ -85,18 +84,18 @@ func _on_area_entered(area):
 	
 #abstract
 func playHitAnimation():
-	push_error()
+	pass
 
 # abstract
 func checkShouldDespawn():
-	push_error()
+	pass
 	
 # abstract
 func checkHealth(): 
-	push_error()
+	pass
 	
 func dropHealthOrb():
-	push_error()
+	pass
 	
 
 

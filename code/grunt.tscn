@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://biymlwji45fr1" path="res://sounds/grunthit.wav" id="5_f3phl"]
 [ext_resource type="AudioStream" uid="uid://dlq6ofgaglnk3" path="res://sounds/gruntDeath.wav" id="6_ha0pj"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_wehfy"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_tsd6g"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -37,7 +37,7 @@ script = ExtResource("1_psjfb")
 [node name="GruntModel" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, -2)
 scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_wehfy")
+sprite_frames = SubResource("SpriteFrames_tsd6g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

@@ -7,6 +7,7 @@ var screen_size
 @export var sniper_scene: PackedScene
 @export var brawler_scene: PackedScene
 @export var dasher_scene: PackedScene
+@export var minion_scene: PackedScene
 
 @export var player_scene: PackedScene
 @export var healthbar_scene: PackedScene
@@ -34,7 +35,8 @@ func game_start():
 	fadeIn()
 	spawnPlayer()
 	Global.onGameStart()
-	waveOne()
+	#waveOne()
+	$SpawnTimer.start()
 	$Music.play()
 	
 func spawnPlayer():
@@ -75,6 +77,8 @@ func waveOne():
 			break
 		await get_tree().create_timer(0.2, false).timeout
 		
+	Global.Player.fireRate *= 1/1.3
+		
 	waveTwo()
 	
 func waveTwo():
@@ -102,6 +106,11 @@ func waveTwo():
 	
 	await get_tree().create_timer(2, false).timeout
 	_on_spawn_timer_timeout()
+	
+	Global.Player.fireRate *= 1/1.2
+	
+	Global.Player.speed *= 1.2
+	Global.Player.maxSpeed *= 1.2
 	
 	# after pre-made waves are completed
 	$SpawnTimer.start()
@@ -153,6 +162,13 @@ func _on_spawn_timer_timeout():
 	if (!Global.gameOver && Global.enemyNum() < 20 && Global.Player != null):
 		spawnEnemy(1, enemyTypes.pick_random())
 		spawnEnemy(1, enemyTypes.pick_random())
+	$SpawnTimer.set_wait_time($SpawnTimer.get_wait_time() * 0.975)
+	if (Global.Player != null):
+		Global.Player.fireRate *= 1/1.01
+		Global.Player.speed *= 1.01
+		Global.Player.maxSpeed *= 1.01
+
+		
 		
 		
 #func spawnGrunt(num):
