@@ -35,6 +35,8 @@ func spawnAnimation():
 		await get_tree().create_timer(0.01, false).timeout
 		self.scale += Vector2(0.1, 0.1)
 		
+	
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	checkShouldDespawn()

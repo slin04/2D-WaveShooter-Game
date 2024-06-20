@@ -10,11 +10,11 @@ var Main
 const bounceForce = 1500
 var maxSpeed = 600 # upper limit to player's speed
 var speed = 350 # player acceleration in pixels per second
-var maxHealth = 100
-var health = 100
-var iframeTime = 0.2
-var fireRate = 0.2
-var attackDamage = 10
+var maxHealth = 100 # maximum health
+var health = 100 # current health
+var iframeTime = 0.2 # time of iframe on hit
+var fireRate = 0.2 # time between each shot
+var attackDamage = 10 
 
 # stuff that makes the program work
 var screen_size # Size of the game window.
