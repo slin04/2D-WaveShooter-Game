@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cbwca3duavh8t"]
 
-[ext_resource type="Texture2D" uid="uid://dgbp5s8gi0ggv" path="res://images/minion.png" id="1_2gxcp"]
+[ext_resource type="Texture2D" uid="uid://dexf3it4bermp" path="res://images/minion.png" id="1_2gxcp"]
 [ext_resource type="Script" path="res://code/enemies/minion.gd" id="1_t857h"]
 [ext_resource type="Texture2D" uid="uid://b01wqidpludkx" path="res://images/minion_hit.png" id="2_qlyre"]
 [ext_resource type="AudioStream" uid="uid://4h8t6o0vhmvr" path="res://sounds/gruntshoot.wav" id="3_vpx4s"]
@@ -27,7 +27,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xq2w"]
-size = Vector2(67, 68)
+size = Vector2(58, 77)
 
 [node name="Minion" type="Area2D"]
 collision_mask = 5
@@ -40,7 +40,7 @@ sprite_frames = SubResource("SpriteFrames_wehfy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(0.5, 0)
+position = Vector2(5, 0.5)
 shape = SubResource("RectangleShape2D_3xq2w")
 
 [node name="GunSound" type="AudioStreamPlayer" parent="."]

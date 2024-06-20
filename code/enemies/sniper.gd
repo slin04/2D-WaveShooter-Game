@@ -61,6 +61,7 @@ func checkHealth():
 			$GruntDeathSound.play()
 		await get_tree().create_timer(0.2, false).timeout
 		dropHealthOrb()
+		dropPowerUp()
 		queue_free()
 		
 func dropHealthOrb():

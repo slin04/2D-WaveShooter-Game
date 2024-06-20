@@ -97,5 +97,7 @@ func checkHealth():
 func dropHealthOrb():
 	pass
 	
-
-
+func dropPowerUp():
+	var roll = randf_range(0, 1)
+	if (roll < 0.05):
+		Main.spawnPowerUp(position)

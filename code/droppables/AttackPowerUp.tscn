@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://dm3jtw4k40d0e"]
+
+[ext_resource type="Texture2D" uid="uid://bdhhqbuld7io4" path="res://images/attack_powerup.png" id="1_crtyc"]
+[ext_resource type="Script" path="res://code/droppables/AttackPowerUp.gd" id="1_gkru2"]
+[ext_resource type="AudioStream" uid="uid://c6txrxtuv2pwm" path="res://sounds/orb_spawn.wav" id="3_v20mp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_77vyu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_crtyc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kh68m"]
+radius = 16.1245
+
+[node name="AttackPowerUp" type="Area2D"]
+script = ExtResource("1_gkru2")
+
+[node name="OrbModel" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -2)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_77vyu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1)
+shape = SubResource("CircleShape2D_kh68m")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.495
+one_shot = true
+autostart = true
+
+[node name="SpawnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_v20mp")
+volume_db = -20.658
+pitch_scale = 1.25
+
+[node name="DespawnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_v20mp")
+volume_db = -22.083
+pitch_scale = 1.84

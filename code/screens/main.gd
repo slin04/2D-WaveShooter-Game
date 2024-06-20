@@ -13,6 +13,7 @@ var screen_size
 @export var healthbar_scene: PackedScene
 
 @export var orb_scene: PackedScene
+@export var powerup_scene: PackedScene
 
 var enemyTypes = ["grunt", "sniper", "brawler", "dasher"]
 
@@ -162,9 +163,9 @@ func _on_spawn_timer_timeout():
 	if (!Global.gameOver && Global.enemyNum() < 20 && Global.Player != null):
 		spawnEnemy(1, enemyTypes.pick_random())
 		spawnEnemy(1, enemyTypes.pick_random())
-	$SpawnTimer.set_wait_time($SpawnTimer.get_wait_time() * 0.975)
+	$SpawnTimer.set_wait_time($SpawnTimer.get_wait_time() * 0.98)
 	if (Global.Player != null):
-		Global.Player.fireRate *= 1/1.01
+		Global.Player.fireRate *= 1/1.02
 		Global.Player.speed *= 1.01
 		Global.Player.maxSpeed *= 1.01
 
@@ -221,6 +222,13 @@ func spawnHealthOrb(position, num):
 		orb = orb_scene.instantiate()
 		orb.position = position
 		add_child(orb)
+		
+func spawnPowerUp(position):
+	#var powerup
+	#powerup = powerup_scene.instantiate()
+	#powerup.position = position
+	#add_child(powerup)
+	pass
 	
 func _on_music_finished():
 	$Music.play()

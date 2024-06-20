@@ -185,6 +185,8 @@ func _on_object_collision(area):
 			handleDasher(area)
 		"minion":
 			handleMinion(area)
+		"powerup":
+			handlePowerup(area)
 			
 
 		
@@ -226,6 +228,15 @@ func handleMinion(area):
 		if (health <= 0):
 			handleDeath()
 		handleInvincibleFrame(iframeTime)
+		
+func handlePowerup(area):
+	attackDamage *= 2
+	fireRate *= 0.5
+	area.queue_free()
+	await get_tree().create_timer(10, false).timeout
+	attackDamage /= 2
+	fireRate /= 0.5
+	
 		
 func handleInvincibleFrame(time):
 	invincible = true
