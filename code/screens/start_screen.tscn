@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvu5oa601a3tn"]
+[gd_scene load_steps=9 format=3 uid="uid://bvu5oa601a3tn"]
 
 [ext_resource type="Script" path="res://code/screens/start_screen.gd" id="1_khpj1"]
 [ext_resource type="PackedScene" uid="uid://bmdh2l8clerqj" path="res://code/screens/start_player.tscn" id="2_grwgm"]
 [ext_resource type="AudioStream" uid="uid://dj3wr6jtc2cbu" path="res://sounds/playershoot.wav" id="2_xpwvb"]
 [ext_resource type="AudioStream" uid="uid://dlq6ofgaglnk3" path="res://sounds/gruntDeath.wav" id="3_4o7p2"]
+[ext_resource type="AudioStream" uid="uid://dtn4bfnxxwlfe" path="res://sounds/game_start_screen_music.wav" id="5_il2u5"]
 
 [sub_resource type="Environment" id="Environment_jpveh"]
 background_mode = 3
@@ -101,5 +102,11 @@ stream = ExtResource("3_4o7p2")
 volume_db = -10.063
 pitch_scale = 1.47
 
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_il2u5")
+volume_db = -15.928
+autoplay = true
+
 [connection signal="area_entered" from="StartButton" to="." method="_on_start_hit"]
 [connection signal="area_entered" from="QuitButton" to="." method="_on_quit_hit"]
+[connection signal="finished" from="Music" to="." method="_on_music_finished"]

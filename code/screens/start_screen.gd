@@ -27,6 +27,8 @@ func _process(delta):
 func _start_game():
 	$StartSound.play()
 	player.despawnAnimation()
+	var tween = get_tree().create_tween().set_parallel(true)
+	tween.tween_property($Music, "volume_db", -40, 1).set_trans(Tween.TRANS_QUAD)
 	await get_tree().create_timer(1, false).timeout
 	get_tree().change_scene_to_file("res://code/screens/main.tscn")
 	
@@ -73,3 +75,7 @@ func _on_quit_hit(area):
 	
 func get_arena_size():
 	return get_viewport_rect().size 
+
+
+func _on_music_finished():
+	$Music.play()

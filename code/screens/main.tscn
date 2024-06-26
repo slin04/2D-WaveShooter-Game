@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dqn3g8reiy8kc"]
+[gd_scene load_steps=16 format=3 uid="uid://dqn3g8reiy8kc"]
 
 [ext_resource type="Script" path="res://code/screens/main.gd" id="1_862m1"]
 [ext_resource type="PackedScene" uid="uid://bamp35jrqrnh" path="res://code/player/player.tscn" id="1_dkm27"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://cyavrptrrhdlw" path="res://sounds/game_music.wav" id="10_kr7x1"]
 [ext_resource type="PackedScene" uid="uid://dtwtd0qa51cnn" path="res://code/enemies/dasher.tscn" id="11_ayldk"]
 [ext_resource type="PackedScene" uid="uid://dm3jtw4k40d0e" path="res://code/droppables/AttackPowerUp.tscn" id="13_25wxj"]
+[ext_resource type="Script" path="res://code/screens/volume_slider.gd" id="14_d26il"]
 
 [sub_resource type="Environment" id="Environment_epgnu"]
 background_mode = 3
@@ -109,6 +110,7 @@ wait_time = 5.0
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_kr7x1")
 volume_db = -15.928
+bus = &"Music"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -128,35 +130,91 @@ vertical_alignment = 1
 
 [node name="Pause" type="ColorRect" parent="CanvasLayer"]
 process_mode = 3
-visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
-color = Color(0, 0, 0, 0.690196)
+color = Color(0, 0, 0, 0.811765)
 script = ExtResource("9_6gdki")
 
 [node name="Game Paused" type="Label" parent="CanvasLayer/Pause"]
 layout_mode = 0
-offset_left = 260.0
-offset_top = 390.0
-offset_right = 1660.0
-offset_bottom = 690.0
+offset_left = 78.0
+offset_top = 396.0
+offset_right = 803.0
+offset_bottom = 563.0
 theme_override_colors/font_color = Color(0.921569, 0.921569, 0.921569, 1)
-theme_override_font_sizes/font_size = 200
+theme_override_font_sizes/font_size = 80
 text = "GAME PAUSED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Esc Instruction" type="Label" parent="CanvasLayer/Pause"]
 layout_mode = 0
-offset_left = 260.0
-offset_top = 950.0
-offset_right = 1660.0
-offset_bottom = 1020.0
+offset_left = 159.0
+offset_top = 567.0
+offset_right = 595.0
+offset_bottom = 637.0
 theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 40
 text = "Press [Esc] to resume"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Pause"]
+layout_mode = 0
+offset_left = 1019.0
+offset_top = 148.0
+offset_right = 1732.0
+offset_bottom = 893.0
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Master Volume" type="Label" parent="CanvasLayer/Pause/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 40
+text = "Master Volume
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Master Slider" type="HSlider" parent="CanvasLayer/Pause/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("14_d26il")
+bus_name = "Master"
+
+[node name="Music Volume" type="Label" parent="CanvasLayer/Pause/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 40
+text = "Music Volume
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Music Slider" type="HSlider" parent="CanvasLayer/Pause/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("14_d26il")
+bus_name = "Music"
+
+[node name="SFX Volume" type="Label" parent="CanvasLayer/Pause/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 40
+text = "SFX Volume
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SFX Slider" type="HSlider" parent="CanvasLayer/Pause/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("14_d26il")
+bus_name = "SFX"
 
 [node name="DeathCamera" type="Camera2D" parent="."]
 visible = false

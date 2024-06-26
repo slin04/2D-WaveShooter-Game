@@ -232,3 +232,5 @@ func spawnPowerUp(position):
 	
 func _on_music_finished():
 	$Music.play()
+
+
