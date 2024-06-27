@@ -50,15 +50,18 @@ shape = SubResource("CircleShape2D_xm752")
 
 [node name="GunSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_nqxiv")
-volume_db = -8.169
+volume_db = -4.607
+bus = &"SFX"
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_wrwp1")
-volume_db = -7.836
+volume_db = -2.85
+bus = &"SFX"
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_pq3yh")
-volume_db = -10.685
+volume_db = -4.274
+bus = &"SFX"
 
 [node name="HealthRegenTimer" type="Timer" parent="."]
 wait_time = 3.0
@@ -66,7 +69,8 @@ one_shot = true
 
 [node name="OrbCollectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_ey0xb")
-volume_db = -11.397
+volume_db = -5.699
+bus = &"SFX"
 
 [node name="iFrameTimer" type="Timer" parent="."]
 

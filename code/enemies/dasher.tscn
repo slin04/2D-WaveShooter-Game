@@ -59,22 +59,26 @@ scale = Vector2(0.625922, 0.625922)
 sprite_frames = SubResource("SpriteFrames_wcby4")
 animation = &"charging"
 
-[node name="HitSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_ibl4b")
-volume_db = -15.671
-pitch_scale = 1.41
-
 [node name="ChargeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_auct7")
-volume_db = -12.195
+volume_db = -5.072
+bus = &"SFX"
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ibl4b")
+volume_db = -6.411
+pitch_scale = 1.41
+bus = &"SFX"
 
 [node name="DashSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_3h038")
-volume_db = -12.195
+volume_db = -4.359
+bus = &"SFX"
 
 [node name="GruntDeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_2j4h4")
-volume_db = -12.822
+volume_db = -4.986
+bus = &"SFX"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2

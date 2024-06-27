@@ -45,17 +45,20 @@ shape = SubResource("CircleShape2D_lu6jd")
 
 [node name="GunSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_qnfdu")
-volume_db = -12.823
+volume_db = -4.275
 pitch_scale = 0.92
+bus = &"SFX"
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_l0ft8")
-volume_db = -15.671
+volume_db = -6.411
 pitch_scale = 1.41
+bus = &"SFX"
 
 [node name="GruntDeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_y0w7j")
-volume_db = -12.822
+volume_db = -5.698
+bus = &"SFX"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2

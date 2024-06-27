@@ -109,7 +109,7 @@ wait_time = 5.0
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_kr7x1")
-volume_db = -15.928
+volume_db = -6.668
 bus = &"Music"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -159,7 +159,7 @@ text = "Press [Esc] to resume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Pause"]
+[node name="Volume Panel" type="VBoxContainer" parent="CanvasLayer/Pause"]
 layout_mode = 0
 offset_left = 1019.0
 offset_top = 148.0
@@ -168,7 +168,7 @@ offset_bottom = 893.0
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Master Volume" type="Label" parent="CanvasLayer/Pause/VBoxContainer"]
+[node name="Master Volume" type="Label" parent="CanvasLayer/Pause/Volume Panel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_font_sizes/font_size = 40
@@ -177,14 +177,14 @@ text = "Master Volume
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Master Slider" type="HSlider" parent="CanvasLayer/Pause/VBoxContainer"]
+[node name="Master Slider" type="HSlider" parent="CanvasLayer/Pause/Volume Panel"]
 layout_mode = 2
 max_value = 1.0
-step = 0.001
+step = 0.01
 script = ExtResource("14_d26il")
 bus_name = "Master"
 
-[node name="Music Volume" type="Label" parent="CanvasLayer/Pause/VBoxContainer"]
+[node name="Music Volume" type="Label" parent="CanvasLayer/Pause/Volume Panel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_font_sizes/font_size = 40
@@ -193,14 +193,14 @@ text = "Music Volume
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Music Slider" type="HSlider" parent="CanvasLayer/Pause/VBoxContainer"]
+[node name="Music Slider" type="HSlider" parent="CanvasLayer/Pause/Volume Panel"]
 layout_mode = 2
 max_value = 1.0
-step = 0.001
+step = 0.01
 script = ExtResource("14_d26il")
 bus_name = "Music"
 
-[node name="SFX Volume" type="Label" parent="CanvasLayer/Pause/VBoxContainer"]
+[node name="SFX Volume" type="Label" parent="CanvasLayer/Pause/Volume Panel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_font_sizes/font_size = 40
@@ -209,10 +209,10 @@ text = "SFX Volume
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SFX Slider" type="HSlider" parent="CanvasLayer/Pause/VBoxContainer"]
+[node name="SFX Slider" type="HSlider" parent="CanvasLayer/Pause/Volume Panel"]
 layout_mode = 2
 max_value = 1.0
-step = 0.001
+step = 0.01
 script = ExtResource("14_d26il")
 bus_name = "SFX"
 

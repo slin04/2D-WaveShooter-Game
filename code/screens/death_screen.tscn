@@ -83,5 +83,6 @@ text = "Menu"
 stream = ExtResource("2_3vp3t")
 volume_db = -10.685
 pitch_scale = 1.4
+bus = &"SFX"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
