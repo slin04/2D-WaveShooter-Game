@@ -48,11 +48,6 @@ volume_db = -4.275
 pitch_scale = 1.33
 bus = &"SFX"
 
-[node name="GruntDeathSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_36xr7")
-volume_db = -12.822
-bus = &"SFX"
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
@@ -61,6 +56,11 @@ one_shot = true
 stream = ExtResource("5_yka57")
 volume_db = -6.411
 pitch_scale = 1.41
+bus = &"SFX"
+
+[node name="GruntDeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_36xr7")
+volume_db = -5.698
 bus = &"SFX"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

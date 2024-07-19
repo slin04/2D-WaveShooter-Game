@@ -49,13 +49,14 @@ func _ready():
 	Global.Player = self
 	health = maxHealth
 	velocity += Vector2(randf_range(-500,500), randf_range(-500,500))
+
 	
 func spawnAnimation():
 	$PlayerModel.set_scale(Vector2(0,0))
 	var tween = get_tree().create_tween()
 	tween.tween_property($PlayerModel, "scale", Vector2(0.6,0.6), 1).set_trans(Tween.TRANS_QUART)
 	$PlayerCamera.set_zoom(Vector2(2,2))
-	tween.tween_property($PlayerCamera, "zoom", Vector2(1,1), 1).set_trans(Tween.TRANS_QUART)
+	tween.tween_property($PlayerCamera, "zoom", Vector2(1,1), 1.5).set_trans(Tween.TRANS_EXPO)
 
 
 	
