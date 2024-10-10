@@ -9,6 +9,7 @@ var screen_size
 @export var dasher_scene: PackedScene
 @export var minion_scene: PackedScene
 
+
 @export var player_scene: PackedScene
 @export var healthbar_scene: PackedScene
 
@@ -169,8 +170,6 @@ func _on_spawn_timer_timeout():
 		Global.Player.speed *= 1.01
 		Global.Player.maxSpeed *= 1.01
 
-		
-		
 		
 #func spawnGrunt(num):
 	#for i in num:
