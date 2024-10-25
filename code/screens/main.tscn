@@ -76,10 +76,10 @@ texture = ExtResource("3_8f00t")
 [node name="ColorRect" type="ColorRect" parent="Arena"]
 z_index = -1
 layout_mode = 0
-offset_left = -1928.0
-offset_top = -1448.0
-offset_right = 6312.0
-offset_bottom = 4113.0
+offset_left = -1918.0
+offset_top = -1451.0
+offset_right = 6322.0
+offset_bottom = 4110.0
 color = Color(0.0666667, 0.0823529, 0.101961, 1)
 
 [node name="Border" type="Node2D" parent="."]
@@ -216,9 +216,18 @@ step = 0.01
 script = ExtResource("14_d26il")
 bus_name = "SFX"
 
+[node name="Button" type="Button" parent="CanvasLayer/Pause"]
+offset_left = 171.0
+offset_top = 794.0
+offset_right = 242.0
+offset_bottom = 844.0
+theme_override_font_sizes/font_size = 30
+text = "Quit"
+
 [node name="DeathCamera" type="Camera2D" parent="."]
 visible = false
 enabled = false
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="finished" from="Music" to="." method="_on_music_finished"]
+[connection signal="pressed" from="CanvasLayer/Pause/Button" to="." method="_on_quit_pressed"]

@@ -233,3 +233,5 @@ func _on_music_finished():
 	$Music.play()
 
 
+func _on_quit_pressed() -> void:
+	get_tree().quit()
